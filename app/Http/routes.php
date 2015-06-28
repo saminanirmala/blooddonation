@@ -16,6 +16,10 @@ Route::get('/donor', 'WelcomeController@donorRegister');
 Route::get('/request', 'WelcomeController@requestRegister');
 Route::get('/login', 'WelcomeController@loginView');
 
+Route::get('/home', 'HomeController@index');
+Route::get('/logout', 'Auth\AuthController@getLogout');
+Route::get('/dashboard', 'user\UserController@index');
+
 //Route::get('home', 'HomeController@index');
 
 Route::controllers([
