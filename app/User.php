@@ -15,16 +15,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var string
 	 */
-	protected $table = 'tbl_user';
-	const EMAIL='samina@ekbana.com';
-	const PASSWORD ='password';
+	protected $table = 'users';
 
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password','fullname','address','email','required_date','password','blood_type','user_type','dob'];
+	protected $fillable = ['name', 'email', 'password'];
+
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
