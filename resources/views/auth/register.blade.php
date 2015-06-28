@@ -1,50 +1,65 @@
-@extends('layouts.default')
+@extends('app')
+
 @section('content')
-    <section>
-        <div class="container">
-            <div class="register">
-                <h3>Registration for Donors</h3>
-                {!! Form::open(array('url'=>'add','files'=>true,'class'=>'frm_field')) !!}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Register</div>
+                <div class="panel-body">
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
 
-                {!! Form::label('name','Full Name',array('id'=>'','class'=>'txt')) !!}
-                {!! Form::text('name','',array('id'=>'','class'=>'txt')) !!}
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/register') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                {!! Form::label('address','Address',array('id'=>'','class'=>'txt')) !!}
-                {!! Form::text('address','',array('id'=>'','class'=>'txt')) !!}
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Name</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            </div>
+                        </div>
 
-                {{ Form::label('gender', 'Gender') }}
-                {{ Form::radio('male', 'Male', array('id'=>'','class'=>'')) }}
-                {{ Form::radio('female', 'Female', array('id'=>'','class'=>'')) }}
-                {{ Form::radio('other', 'Other', array('id'=>'','class'=>'')) }}
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">E-Mail Address</label>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                            </div>
+                        </div>
 
-                {!! Form::label('dob','Date of Birth',array('id'=>'','class'=>'txts')) !!}
-                {!! Form::text('dob','',array('id'=>'','class'=>'txts')) !!}
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Password</label>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password">
+                            </div>
+                        </div>
 
-                {!! Form::label('mobileno','Contact no',array('id'=>'','class'=>'txts')) !!}
-                {!! Form::text('mobileno','',array('id'=>'','class'=>'txts')) !!}
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Confirm Password</label>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password_confirmation">
+                            </div>
+                        </div>
 
-                {!! Form::label('wardno','Ward no',array('id'=>'','class'=>'txts')) !!}
-                {!! Form::text('wardno','',array('id'=>'','class'=>'txts')) !!}
-
-                {!! Form::label('email','Email',array('id'=>'','class'=>'txt')) !!}
-                {!! Form::text('email','',array('id'=>'','class'=>'txt')) !!}
-
-                {!! Form::label('password','Password',array('id'=>'','class'=>'txts')) !!}
-                {!! Form::password('password','',array('id'=>'','class'=>'txts')) !!}
-
-                {!! Form::label('confirm-password','Confirm Password',array('id'=>'','class'=>'txts')) !!}
-                {!! Form::password('confirm-password','',array('id'=>'','class'=>'txts')) !!}
-
-                {!! Form::label('status','Blood Type',array('id'=>'','class'=>'')) !!}
-                {!! Form::select('status', ['A', 'A+','B','B+'])!!}
-
-                <br/>
-                <!-- submit buttons -->
-                {!! Form::submit('ADD') !!}
-
-                {!! Form::close() !!}
-            </div><!-- end of register -->
-        </div><!-- end of container -->
-    </section><!-- end of section -->
-    <div class="container">
-@stop
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
