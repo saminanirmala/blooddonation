@@ -3,7 +3,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\Login;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,23 +15,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('UserTableSeeder');
+        $this->call('LoginTableSeeder');
 
-        $this->command->info('User table seeded!');
+        $this->command->info('Login table seeded!');
 
     }
 }
 
-class UserTableSeeder extends Seeder
+class LoginTableSeeder extends Seeder
 {
 
     public function run()
     {
-        DB::table('tbl_user')->delete();
-        $email = User::EMAIL;
-        $password = Hash::make(User::PASSWORD);
+        DB::table('users')->delete();
+        $username = Login::USERNAME;
+        $password = Login::PASSWORD;
 
-        User::create(array('email' => $email ,
+        Login::create(array('email' => $username ,
                 'password' => $password)
         );
     }
